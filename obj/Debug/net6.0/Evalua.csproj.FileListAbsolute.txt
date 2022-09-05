@@ -1,0 +1,15 @@
+C:\ITQ\5to Sem\Automatas II\Evalua\obj\Debug\net6.0\Evalua.csproj.AssemblyReference.cache
+C:\ITQ\5to Sem\Automatas II\Evalua\obj\Debug\net6.0\Evalua.GeneratedMSBuildEditorConfig.editorconfig
+C:\ITQ\5to Sem\Automatas II\Evalua\obj\Debug\net6.0\Evalua.AssemblyInfoInputs.cache
+C:\ITQ\5to Sem\Automatas II\Evalua\obj\Debug\net6.0\Evalua.AssemblyInfo.cs
+C:\ITQ\5to Sem\Automatas II\Evalua\obj\Debug\net6.0\Evalua.csproj.CoreCompileInputs.cache
+C:\ITQ\5to Sem\Automatas II\Evalua\bin\Debug\net6.0\Evalua.exe
+C:\ITQ\5to Sem\Automatas II\Evalua\bin\Debug\net6.0\Evalua.deps.json
+C:\ITQ\5to Sem\Automatas II\Evalua\bin\Debug\net6.0\Evalua.runtimeconfig.json
+C:\ITQ\5to Sem\Automatas II\Evalua\bin\Debug\net6.0\Evalua.dll
+C:\ITQ\5to Sem\Automatas II\Evalua\bin\Debug\net6.0\Evalua.pdb
+C:\ITQ\5to Sem\Automatas II\Evalua\obj\Debug\net6.0\Evalua.dll
+C:\ITQ\5to Sem\Automatas II\Evalua\obj\Debug\net6.0\refint\Evalua.dll
+C:\ITQ\5to Sem\Automatas II\Evalua\obj\Debug\net6.0\Evalua.pdb
+C:\ITQ\5to Sem\Automatas II\Evalua\obj\Debug\net6.0\Evalua.genruntimeconfig.cache
+C:\ITQ\5to Sem\Automatas II\Evalua\obj\Debug\net6.0\ref\Evalua.dll
