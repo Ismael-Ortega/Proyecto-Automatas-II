@@ -59,12 +59,12 @@ namespace Evalua
         public Lexico()
         {
             linea = 1;
-            string path = "C:\\prueba.cpp";
+            string path = "C:\\ITQ\\5to Sem\\Automatas II\\Evalua\\prueba.cpp";
             bool existencia = File.Exists(path);
-            log = new StreamWriter("C:\\prueba.Log"); 
+            log = new StreamWriter("C:\\ITQ\\5to Sem\\Automatas II\\Evalua\\prueba.Log"); 
             log.AutoFlush = true;
             //log.WriteLine("Primer constructor");
-            log.WriteLine("Archivo: prueba.cpp");
+            log.WriteLine("Archivo: C:\\ITQ\\5to Sem\\Automatas II\\Evalua\\prueba.cpp");
             log.WriteLine(DateTime.Now);//Requerimiento 1:
             //Investigar como checar si un archivo existe o no existe 
             if (existencia == true)
