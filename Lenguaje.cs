@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 //Requerimiento 1.- Eliminar las dobles comillas del printf e interpretar las secuencias de escape
 //                  dentro de la cadena
-//Requerimiento 2.- Marcar los errores sintacticos cuando la variable no exista
-//Requerimiento 3.- Modificar el valor de la variable en la asignacion (metodo Asignacion)
+//Requerimiento 2.- Marcar los errores sintacticos cuando la variable no exista (Este ya esta hecho?)
+//Requerimiento 3.- Modificar el valor de la variable en la asignacion (linea 48, aqui mismo)
 namespace Evalua
 {
     public class Lenguaje : Sintaxis
@@ -44,6 +44,10 @@ namespace Evalua
             }
             return false;
         }
+        private void modVariable(string nombre, float nuevoValor){
+            
+        }
+
         //Programa  -> Librerias? Variables? Main
         public void Programa()
         {
@@ -184,13 +188,16 @@ namespace Evalua
         {
             //Requerimiento 2.- Si no existe la variable levanta la excepcion
             log.WriteLine();
-            log.WriteLine(getContenido() + " = ");
+            log.Write(getContenido()+" = ");
+            string nombre = getContenido();
             match(Tipos.Identificador);
             match(Tipos.Asignacion);
             Expresion();
             match(";");
-            log.Write(" = " + stack.Pop());
+            float resultado = stack.Pop();
+            log.Write("= " + resultado);
             log.WriteLine();
+            modVariable(nombre, resultado);
         }
 
         //While -> while(Condicion) bloque de instrucciones | instruccion
@@ -391,7 +398,8 @@ namespace Evalua
                 log.Write(operador + " ");
                 float n1 = stack.Pop();
                 float n2 = stack.Pop();
-                switch (operador){
+                switch (operador)
+                {
                     case "+":
                         stack.Push(n2 + n1);
                         break;
@@ -418,7 +426,8 @@ namespace Evalua
                 log.Write(operador + " ");
                 float n1 = stack.Pop();
                 float n2 = stack.Pop();
-                switch (operador){
+                switch (operador)
+                {
                     case "*":
                         stack.Push(n2 * n1);
                         break;
@@ -433,7 +442,7 @@ namespace Evalua
         {
             if (getClasificacion() == Tipos.Numero)
             {
-                log.Write(getContenido()+ " ");
+                log.Write(getContenido() + " " );
                 stack.Push(float.Parse(getContenido()));
                 match(Tipos.Numero);
             }
