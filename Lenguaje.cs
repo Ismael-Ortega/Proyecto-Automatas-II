@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 //Requerimiento 1.- Eliminar las dobles comillas del printf e interpretar las secuencias de escape
-//                  dentro de la cadena
+//                  dentro de la cadena LISTO
 //Requerimiento 2.- Marcar los errores sintacticos cuando la variable no exista (Este ya esta hecho?)
-//Requerimiento 3.- Modificar el valor de la variable en la asignacion (linea 48, aqui mismo)
+//Requerimiento 3.- Modificar el valor de la variable en la asignacion (linea 51, aqui mismo)
 //Requerimiento 4.- Obtener el valor de la variable cuando se requiera y programar el metodo getValor()
+//Requerimiento 5.- Modificar el valor de la variable en el scanf
 namespace Evalua
 {
     public class Lenguaje : Sintaxis
@@ -375,7 +376,11 @@ namespace Evalua
             match("(");
             if (getClasificacion() == Tipos.Cadena)
             {
-                //Requerimiento 1.- Aqui se eliminan las comillas del resultado
+                //Requerimiento 1.- Aqui se eliminan las comillas del resultado y las secuencias de escape
+                //Se validan para cada una de los casos requeridos, se utiliza una \ para los metacaracteres especificados
+                setContenido(getContenido().Replace("\"", ""));
+                setContenido(getContenido().Replace("\\n", "\n"));
+                setContenido(getContenido().Replace("\\t", "     "));
                 Console.Write(getContenido());
                 match(Tipos.Cadena);
             }
@@ -394,6 +399,12 @@ namespace Evalua
             match("scanf");
             match("(");
             match(Tipos.Cadena);
+            match(",");
+            match("&");
+            //Requerimiento 2.- Si no existe la variable levanta la excepcion
+            string val = "" + Console.ReadLine();
+            //Requerimiento 5.- Modificar el valor de la variable
+            match(Tipos.Identificador);
             match(")");
             match(";");
         }
