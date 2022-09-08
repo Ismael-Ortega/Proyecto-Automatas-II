@@ -4,6 +4,7 @@ using System.Collections.Generic;
 //                  dentro de la cadena
 //Requerimiento 2.- Marcar los errores sintacticos cuando la variable no exista (Este ya esta hecho?)
 //Requerimiento 3.- Modificar el valor de la variable en la asignacion (linea 48, aqui mismo)
+//Requerimiento 4.- Obtener el valor de la variable cuando se requiera y programar el metodo getValor()
 namespace Evalua
 {
     public class Lenguaje : Sintaxis
@@ -27,6 +28,8 @@ namespace Evalua
 
         private void displayVariables()
         {
+            log.WriteLine();
+            log.WriteLine("variables: ");
             foreach (Variable v in variables)
             {
                 log.WriteLine(v.getNombre()+" "+v.getTipo()+" "+v.getValor());
@@ -44,8 +47,16 @@ namespace Evalua
             }
             return false;
         }
-        private void modVariable(string nombre, float nuevoValor){
+        private void modVariable(string nombre, float nuevoValor)
+        {
             
+        }
+
+        private float getValor(string nombreVariable)
+        {
+            //foreach (Variable v in variables) //Cambio que vamos a realizar
+            //{   }
+            return 0;
         }
 
         //Programa  -> Librerias? Variables? Main
@@ -258,15 +269,18 @@ namespace Evalua
         //Incremento -> Identificador ++ | --
         private void Incremento()
         {
+            string variable = getContenido();
             //Requerimiento 2.- Si no existe la variable levanta la excepcion
             match(Tipos.Identificador);
             if(getContenido() == "+")
             {
                 match("++");
+                modVariable(variable, getValor(variable)+1);
             }
             else
             {
                 match("--");
+                modVariable(variable, getValor(variable)-1);
             }
         }
 
@@ -276,6 +290,7 @@ namespace Evalua
             match("switch");
             match("(");
             Expresion();
+            stack.Pop();
             match(")");
             match("{");
             ListaDeCasos();
@@ -300,6 +315,7 @@ namespace Evalua
         {
             match("case");
             Expresion();
+            stack.Pop();
             match(":");
             ListaInstruccionesCase();
             if(getContenido() == "break")
@@ -317,8 +333,10 @@ namespace Evalua
         private void Condicion()
         {
             Expresion();
+            stack.Pop();
             match(Tipos.OperadorRelacional);
             Expresion();
+            stack.Pop();
         }
 
         //If -> if(Condicion) bloque de instrucciones (else bloque de instrucciones)?
@@ -350,18 +368,27 @@ namespace Evalua
             }
         }
 
-        //Printf -> printf(cadena);
+        //Printf -> printf(cadena o expresion);
         private void Printf()
         {
             match("printf");
             match("(");
-            Console.Write(getContenido());
-            match(Tipos.Cadena);
+            if (getClasificacion() == Tipos.Cadena)
+            {
+                //Requerimiento 1.- Aqui se eliminan las comillas del resultado
+                Console.Write(getContenido());
+                match(Tipos.Cadena);
+            }
+            else
+            {
+                Expresion();
+                Console.Write(stack.Pop());
+            }
             match(")");
             match(";");
         }
 
-        //Scanf -> scanf(cadena);
+        //Scanf -> scanf(cadena, & Identificador);
         private void Scanf()    
         {
             match("scanf");
@@ -449,6 +476,8 @@ namespace Evalua
             else if (getClasificacion() == Tipos.Identificador)
             {
                 //Requerimiento 2.- Si no existe la variable levanta la excepcion
+                log.Write(getContenido() + " " );
+                stack.Push(getValor(getContenido()));
                 match(Tipos.Identificador);
             }
             else
