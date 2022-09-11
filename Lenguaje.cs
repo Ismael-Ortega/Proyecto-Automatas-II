@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 //Requerimiento 1.- Eliminar las dobles comillas del printf e interpretar las secuencias de escape
 //                  dentro de la cadena LISTO
-//Requerimiento 2.- Marcar los errores sintacticos cuando la variable no exista (Este ya esta hecho?)
+//Requerimiento 2.- Marcar los errores sintacticos cuando la variable no exista (Este ya esta hecho?) LISTO? Verificar donde mas falta
+//                  por colocar el metodo creado para cuando no existe
 //Requerimiento 3.- Modificar el valor de la variable en la asignacion (linea 51, aqui mismo)
 //Requerimiento 4.- Obtener el valor de la variable cuando se requiera y programar el metodo getValor()
 //Requerimiento 5.- Modificar el valor de la variable en el scanf
@@ -50,13 +51,22 @@ namespace Evalua
         }
         private void modVariable(string nombre, float nuevoValor)
         {
-            
+            foreach (Variable v in variables) //Cambio que vamos a realizar
+            {  
+                if (nombre == v.getNombre()){
+                    v.setValor(nuevoValor);
+                }
+            }
         }
 
         private float getValor(string nombreVariable)
         {
-            //foreach (Variable v in variables) //Cambio que vamos a realizar
-            //{   }
+            foreach (Variable v in variables) //Cambio que vamos a realizar
+            {
+                if (nombreVariable == v.getNombre()){
+                    return v.getValor();
+                }
+            }
             return 0;
         }
 
@@ -199,6 +209,10 @@ namespace Evalua
         private void Asignacion()
         {
             //Requerimiento 2.- Si no existe la variable levanta la excepcion
+            string nuevaVariable = getContenido();
+            if (existeVariable(nuevaVariable) != true){ //Utilizamos la funcion de ExisteVariable, pues regresa true o false
+                throw new Error("\nLa variable " + nuevaVariable + " no se ha declarado en la cabecera\n", log);
+            }
             log.WriteLine();
             log.Write(getContenido()+" = ");
             string nombre = getContenido();
@@ -219,7 +233,7 @@ namespace Evalua
             match("(");
             Condicion();
             match(")");
-             if (getContenido() == "{") 
+            if (getContenido() == "{") 
             {
                 BloqueInstrucciones();
             }
@@ -272,16 +286,19 @@ namespace Evalua
         {
             string variable = getContenido();
             //Requerimiento 2.- Si no existe la variable levanta la excepcion
+            if (existeVariable(variable) != true){ //Utilizamos la funcion de ExisteVariable, pues regresa true o false
+                throw new Error("\nLa variable " + variable + " no se ha declarado en la cabecera\n", log);
+            }
             match(Tipos.Identificador);
             if(getContenido() == "+")
             {
-                match("++");
                 modVariable(variable, getValor(variable)+1);
+                match("++");
             }
             else
             {
-                match("--");
                 modVariable(variable, getValor(variable)-1);
+                match("--");
             }
         }
 
@@ -402,8 +419,13 @@ namespace Evalua
             match(",");
             match("&");
             //Requerimiento 2.- Si no existe la variable levanta la excepcion
+            string variable = getContenido();
+             if (existeVariable(variable) != true){ //Utilizamos la funcion de ExisteVariable, pues regresa true o false
+                throw new Error("\nLa variable " + variable + " no se ha declarado en la cabecera\n", log);
+            }
             string val = "" + Console.ReadLine();
             //Requerimiento 5.- Modificar el valor de la variable
+            //val.modVariable;
             match(Tipos.Identificador);
             match(")");
             match(";");
@@ -487,6 +509,10 @@ namespace Evalua
             else if (getClasificacion() == Tipos.Identificador)
             {
                 //Requerimiento 2.- Si no existe la variable levanta la excepcion
+                string variable = getContenido();
+                if (existeVariable(variable) != true){ //Utilizamos la funcion de ExisteVariable, pues regresa true o false
+                    throw new Error("\nLa variable " + variable + " no se ha declarado en la cabecera\n", log);
+                }
                 log.Write(getContenido() + " " );
                 stack.Push(getValor(getContenido()));
                 match(Tipos.Identificador);
