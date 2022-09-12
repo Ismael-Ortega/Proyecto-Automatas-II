@@ -1,4 +1,4 @@
-#include <iostream>
+/*#include <iostream>
 #include <stdio.h>
 #include <conio.h>
 float resultado;
@@ -12,4 +12,29 @@ void main()
     area = pi *(radio * radio);
     printf("\narea = ");
     printf(area);
+}*/
+
+//EJEMPLO A PROBAR
+
+#include <iostream>
+#include <stdio.h>
+#include <conio.h>
+float area, radio, pi, resultado;
+int a, d;
+// Este programa calcula el volumen de un cilindro.
+void main()
+{
+    printf("\n\n\n\t\tHolaaaaaaaaa");
+    printf("\n\n\tRadio =  ");
+    scanf("%d", &radio);
+    pi = 3.141592653589793;
+    d = 4;
+    area = pi * (radio * radio);
+    printf("\nArea = ");
+    printf(area);
+    printf("Hola");
+    
+    for(d = 10; d<20; d++) {
+    }
+    printf(d); //El valor se imprime de forma correcta, funcionando el ++ para d
 }

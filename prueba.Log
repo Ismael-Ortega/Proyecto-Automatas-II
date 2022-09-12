@@ -1,12 +1,18 @@
 Archivo: C:\ITQ\5to Sem\Automatas II\Evalua\prueba.cpp
-11/09/2022 07:49:08 p. m.
+11/09/2022 07:56:42 p. m.
 
-pi = 3.141592653587793 = 3.1415927
+pi = 3.141592653589793 = 3.1415927
+
+d = 4 = 4
 
 area = pi radio radio * * = 31415.928
 area 
+d = 10 = 10
+d 20 d 
 variables: 
-resultado Float 0
 area Float 31415.928
 radio Float 100
 pi Float 3.1415927
+resultado Float 0
+a Int 0
+d Int 11
