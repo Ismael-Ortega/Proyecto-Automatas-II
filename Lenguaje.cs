@@ -2,11 +2,10 @@ using System;
 using System.Collections.Generic;
 //Requerimiento 1.- Eliminar las dobles comillas del printf e interpretar las secuencias de escape
 //                  dentro de la cadena LISTO
-//Requerimiento 2.- Marcar los errores sintacticos cuando la variable no exista (Este ya esta hecho?) LISTO? Verificar donde mas falta
-//                  por colocar el metodo creado para cuando no existe
-//Requerimiento 3.- Modificar el valor de la variable en la asignacion (linea 51, aqui mismo)
-//Requerimiento 4.- Obtener el valor de la variable cuando se requiera y programar el metodo getValor()
-//Requerimiento 5.- Modificar el valor de la variable en el scanf
+//Requerimiento 2.- Marcar los errores sintacticos cuando la variable no exista LISTO
+//Requerimiento 3.- Modificar el valor de la variable en la asignacion (linea 51, aqui mismo) LISTO
+//Requerimiento 4.- Obtener el valor de la variable cuando se requiera y programar el metodo getValor() LISTO
+//Requerimiento 5.- Modificar el valor de la variable en el scanf LISTO
 namespace Evalua
 {
     public class Lenguaje : Sintaxis
@@ -290,7 +289,7 @@ namespace Evalua
                 throw new Error("\nLa variable " + variable + " no se ha declarado en la cabecera\n", log);
             }
             match(Tipos.Identificador);
-            if(getContenido() == "+")
+            if(getContenido() == "++")
             {
                 modVariable(variable, getValor(variable)+1);
                 match("++");
@@ -424,8 +423,10 @@ namespace Evalua
                 throw new Error("\nLa variable " + variable + " no se ha declarado en la cabecera\n", log);
             }
             string val = "" + Console.ReadLine();
-            //Requerimiento 5.- Modificar el valor de la variable
-            //val.modVariable;
+            //Requerimiento 5.- Modificar el valor de la variable en el Scanf
+            //Hacemos el parseo de val, de string a float, para poder utilizarlo en el metodo modVariable
+            float nuevaVal = float.Parse(val);
+            modVariable(variable, nuevaVal);
             match(Tipos.Identificador);
             match(")");
             match(";");
